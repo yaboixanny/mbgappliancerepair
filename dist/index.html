@@ -53,6 +53,10 @@
 .service-header__book{display:inline-flex;align-items:center;justify-content:center;gap:8px}.header-click-icon{width:19px;height:19px;flex:none}.desktop-book-float:not([hidden]){animation:booking-nudge 2.2s ease-in-out infinite}@keyframes booking-nudge{0%,84%,100%{transform:translateY(0)}88%{transform:translateY(-6px)}92%{transform:translateY(0)}95%{transform:translateY(-3px)}}.desktop-book-float:hover,.desktop-book-float:focus-visible{animation:none}@media(prefers-reduced-motion:reduce){.desktop-book-float:not([hidden]){animation:none}}
 
 .service-header__phone .i{width:17px;height:17px;flex:none}@media(max-width:700px){.service-header__phone{gap:6px;font-size:13px;padding:11px 14px;white-space:nowrap}}@media(max-width:860px){.x-mbar .x-mcall{width:100%!important;flex:1 1 100%!important;justify-content:center!important}.ow-proc .ow-step{grid-template-columns:64px minmax(0,1fr);gap:20px}.ow-proc .ow-step__dot{width:64px;height:64px}.ow-proc .ow-step.active .ow-step__dot{box-shadow:0 0 0 5px var(--lilac-soft,#efe6fb)}.ow-proc .ow-step__k{margin-top:0}}@media(max-width:420px){.ow-proc .ow-step{grid-template-columns:56px minmax(0,1fr);gap:18px}.ow-proc .ow-step__dot{width:56px;height:56px}}
+
+.x-mbar[hidden]{display:none!important}
+
+@media(max-width:700px){.service-header__phone{animation:header-call-pulse 2.8s ease-in-out infinite}.service-header__phone:hover,.service-header__phone:focus-visible{animation:none}}@keyframes header-call-pulse{0%,72%,100%{transform:scale(1)}82%{transform:scale(1.045)}92%{transform:scale(1)}}@media(prefers-reduced-motion:reduce){.service-header__phone{animation:none!important}}
 </style>
 </head>
 <body class="inner page-washer-repairs" id="top">
@@ -118,7 +122,7 @@
 <a class="desktop-book-float" href="https://mbgapplianceservices.com/book/?appliance=washer" hidden>Book a Repair <span aria-hidden="true">→</span></a>
 
 <footer class="x-foot simple-footer"><div class="wrap"><div class="x-foot__brand"><img src="https://mbgapplianceservices.com/assets/img/mbg-appliance-services-logo-light.png" alt="MBG Appliance Services" width="1000" height="449"><p>High-end appliance repair for residential, condo and marine customers across South Florida and the Treasure Coast. Independent service company, not affiliated with the manufacturers named.</p><a class="x-foot__phone" href="tel:+18888411175"><svg class="i" aria-hidden="true"><use href="#i-phone"></use></svg>888-841-1175</a></div><div class="x-foot__giant" aria-hidden="true" translate="no">MBG APPLIANCE</div><div class="x-foot__base"><span>© 2026 MBG Appliance Services. All rights reserved.</span></div></div></footer>
-<div class="x-mbar"><a class="x-mcall" href="tel:+18888411175" aria-label="Call MBG at 888-841-1175"><span class="x-mcall__ic"><svg class="i" aria-hidden="true"><use href="#i-phone"></use></svg></span><span class="x-mcall__t"><small>Call</small><b>888-841-1175</b></span></a></div><script defer src="https://mbgapplianceservices.com/assets/vendor/gsap.min.js"></script>
+<div class="x-mbar" hidden><a class="x-mcall" href="tel:+18888411175" aria-label="Call MBG at 888-841-1175"><span class="x-mcall__ic"><svg class="i" aria-hidden="true"><use href="#i-phone"></use></svg></span><span class="x-mcall__t"><small>Call</small><b>888-841-1175</b></span></a></div><script defer src="https://mbgapplianceservices.com/assets/vendor/gsap.min.js"></script>
 <script defer src="https://mbgapplianceservices.com/assets/vendor/ScrollTrigger.min.js"></script>
 <script defer src="https://mbgapplianceservices.com/assets/vendor/lenis.min.js"></script>
 <script defer src="https://mbgapplianceservices.com/assets/js/site.js?v=007b322a"></script>
@@ -126,7 +130,7 @@
 <script>
 (function(){
   var button=document.querySelector('.desktop-book-float'),hero=document.querySelector('.ph'),status=document.querySelector('.service-header__status'),statusText=status&&status.querySelector('[data-status-text]');
-  function updateButton(){if(button&&hero){button.hidden=hero.getBoundingClientRect().bottom>0;}}
+  function updateButton(){if(button&&hero){button.hidden=hero.getBoundingClientRect().bottom>0;}var mobileBar=document.querySelector('.x-mbar'),heroCall=document.querySelector('.ph-ctas a[href^=\"tel:\"]'),header=document.querySelector('.service-header');if(mobileBar&&heroCall){var top=header?header.getBoundingClientRect().bottom:0;mobileBar.hidden=window.innerWidth>860||heroCall.getBoundingClientRect().bottom>top;}}
   function updateStatus(){if(status&&statusText){status.classList.toggle('is-open',/^open now\b/i.test(statusText.textContent.trim()));}}
   window.addEventListener('scroll',updateButton,{passive:true});window.addEventListener('resize',updateButton);updateButton();
   if(statusText){new MutationObserver(updateStatus).observe(statusText,{childList:true,subtree:true,characterData:true});updateStatus();}
